@@ -17,8 +17,10 @@ export class GifsService {
 
 
 
+  constructor(private http:HttpClient ) {
 
-  constructor(private http:HttpClient ) { }
+
+   }
 
   get tagsHistory() {
 
@@ -33,7 +35,22 @@ export class GifsService {
     }
     this._tagsHistory.unshift(tag);
     this._tagsHistory = this.tagsHistory.splice(0,10);
+    this.saveLocalStorage();
 
+  }
+
+  private saveLocalStorage():void {
+    localStorage.setItem('tags', JSON.stringify(this._tagsHistory));
+  }
+
+  private loadLocalStorage():void {
+    if(!localStorage.getItem('tags')){
+      this._tagsHistory = JSON.parse(localStorage.getItem('tags')!);
+
+      // if(this._tagsHistory.length ===0) return;
+      //   this.searchTag(this._tagsHistory [0]) ;
+
+    }
   }
 
   async searchTag(tag: string) {
@@ -58,6 +75,8 @@ export class GifsService {
       //console.log({gifs:this.gifList});
 
     })
+
+
 
 
 

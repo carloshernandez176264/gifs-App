@@ -6,6 +6,7 @@ import { HomePageComponent } from "./gifs/pages/home/home-page.component";
 
 
 
+
 @Component({
     selector: 'app-root',
     standalone: true,
